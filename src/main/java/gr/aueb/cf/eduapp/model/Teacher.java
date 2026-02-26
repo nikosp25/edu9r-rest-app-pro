@@ -39,6 +39,10 @@ public class Teacher extends AbstractEntity {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "personal_info_id", nullable = false)
+    private PersonalInfo personalInfo;
+
     @PrePersist
     public void initializeUUID() {
         this.uuid = UUID.randomUUID();
