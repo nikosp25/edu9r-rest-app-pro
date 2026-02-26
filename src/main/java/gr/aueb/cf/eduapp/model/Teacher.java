@@ -40,7 +40,7 @@ public class Teacher extends AbstractEntity {
     private User user;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "personal_info_id", nullable = false)
+    @JoinColumn(name = "personal_info_id", unique = true)
     private PersonalInfo personalInfo;
 
     @PrePersist
