@@ -86,7 +86,7 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         log.warn("Unexpected error. Message={}", e.getMessage());
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ErrorResponseDTO("INTERNAL_SERVER_ERROR", "A unexpected error occurred."));
+                .body(new ErrorResponseDTO("INTERNAL_SERVER_ERROR", "An unexpected error occurred."));
     }
 
     @ExceptionHandler(AuthenticationException.class)
