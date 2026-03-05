@@ -1,8 +1,9 @@
 package gr.aueb.cf.eduapp.service;
 
-import gr.aueb.cf.eduapp.core.exception.EntityAlreadyExistsException;
-import gr.aueb.cf.eduapp.core.exception.EntityInvalidArgumentException;
-import gr.aueb.cf.eduapp.core.exception.EntityNotFoundException;
+
+import gr.aueb.cf.eduapp.core.exceptions.EntityAlreadyExistsException;
+import gr.aueb.cf.eduapp.core.exceptions.EntityInvalidArgumentException;
+import gr.aueb.cf.eduapp.core.exceptions.EntityNotFoundException;
 import gr.aueb.cf.eduapp.dto.UserInsertDTO;
 import gr.aueb.cf.eduapp.dto.UserReadOnlyDTO;
 import gr.aueb.cf.eduapp.mapper.Mapper;
@@ -17,11 +18,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
 import java.util.UUID;
 
 @Service
-@Slf4j // TODO add logging
+@Slf4j
 @RequiredArgsConstructor
 public class UserService implements IUserService {
 
@@ -29,6 +29,14 @@ public class UserService implements IUserService {
     private final Mapper mapper;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+
+//    @Autowired
+//    public UserService(UserRepository userRepository, Mapper mapper, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+//        this.userRepository = userRepository;
+//        this.mapper = mapper;
+//        this.roleRepository = roleRepository;
+//        this.passwordEncoder = passwordEncoder;
+//    }
 
     @Override
     @Transactional(rollbackFor = {EntityAlreadyExistsException.class, EntityInvalidArgumentException.class})
@@ -87,5 +95,11 @@ public class UserService implements IUserService {
             log.error("Get failed. Active user with uuid={} not found", uuid);
             throw e;
         }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean isUserExists(String username) {
+        return userRepository.findByUsername(username).isPresent();
     }
 }
