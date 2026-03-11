@@ -24,7 +24,7 @@ Create a MySQL database and user:
 
 ```sql
 CREATE DATABASE schoolapp9csrpro CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-CREATE USER 'user9'@'localhost' IDENTIFIED BY '12345';
+CREATE USER 'cf9'@'localhost' IDENTIFIED BY '12345';
 GRANT ALL PRIVILEGES ON schoolapp9csrpro.* TO 'user9'@'localhost';
 FLUSH PRIVILEGES;
 ```
@@ -35,17 +35,17 @@ Flyway runs all migrations automatically on startup from `src/main/resources/db/
 
 The active profile is `dev` by default. Dev settings live in `src/main/resources/application-dev.properties`.
 
-| Property | Default (dev) | Override via |
-|---|---|---|
-| DB host | `localhost` | `MYSQL_HOST` |
-| DB port | `3306` | `MYSQL_PORT` |
+| Property | Default (dev)      | Override via |
+|---|--------------------|---|
+| DB host | `localhost`        | `MYSQL_HOST` |
+| DB port | `3306`             | `MYSQL_PORT` |
 | DB name | `schoolapp9csrpro` | `MYSQL_DB` |
-| DB user | `user9` | `MYSQL_USER` |
-| DB password | `12345` | `MYSQL_PASSWORD` |
-| JWT secret | *(dev value)* | `app.security.secret-key` |
+| DB user | `cf9`              | `MYSQL_USER` |
+| DB password | `12345`            | `MYSQL_PASSWORD` |
+| JWT secret | *(dev value)*      | `app.security.secret-key` |
 | JWT expiration | `10800000` ms (3h) | `app.security.jwt-expiration` |
-| CORS origins | *(dev value)* | `allowed.origins` (comma-separated) |
-| BCrypt strength | `12` | `security.bcrypt.strength` |
+| CORS origins | *(dev value)*      | `allowed.origins` (comma-separated) |
+| BCrypt strength | `12`               | `security.bcrypt.strength` |
 
 > **Production**: never commit real secrets. Inject `app.security.secret-key` via environment variable.
 
